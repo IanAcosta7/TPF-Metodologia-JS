@@ -1,5 +1,4 @@
 import ApiCovid from "./ApiCovid.js";
+import CovidTablePopulator from "./CovidTablePopulator.js";
 
-let covidicion = new ApiCovid();
-
-covidicion.getCases();
+CovidTablePopulator.setTableCountry(ApiCovid.getCountries());
