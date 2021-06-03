@@ -1,29 +1,32 @@
 class CovidTablePopulator{
-    static setTableCountry(covidCountry){
-        let list = "";
+    static setTableCountry(countries){
+        let tableContent = document.getElementById("countryTable").innerHTML;
 
-        for(let i=0; i<covidCountry.length; i++){
-            list+= `    <td>${covidCountry.abbreviation}</td>
-                        <td>${covidCountry.capital_city}</td>
-                        <td>${covidCountry.confirmed}</td>
-                        <td>${covidCountry.continent}</td>
-                        <td>${covidCountry.country}</td>
-                        <td>${covidCountry.deaths}</td>
-                        <td>${covidCountry.elevation_in_meters}</td>
-                        <td>${covidCountry.iso}</td>
-                        <td>${covidCountry.lat}</td>
-                        <td>${covidCountry.life_expectancy}</td>
-                        <td>${covidCountry.location}</td>
-                        <td>${covidCountry.long}</td>
-                        <td>${covidCountry.population}</td>
-                        <td>${covidCountry.recovered}</td>
-                        <td>${covidCountry.sq_km_area}</td>
-                        <td>${covidCountry.updated}</td>
-                    `
-        }
+        tableContent += countries.map(country => (
+            `   
+            <tr>
+                <td>${country.abbreviation}</td>
+                <td>${country.capital_city}</td>
+                <td>${country.confirmed}</td>
+                <td>${country.continent}</td>
+                <td>${country.country}</td>
+                <td>${country.deaths}</td>
+                <td>${country.elevation_in_meters}</td>
+                <td>${country.iso}</td>
+                <td>${country.lat}</td>
+                <td>${country.life_expectancy}</td>
+                <td>${country.location}</td>
+                <td>${country.long}</td>
+                <td>${country.population}</td>
+                <td>${country.recovered}</td>
+                <td>${country.sq_km_area}</td>
+                <td>${country.updated}</td>
+            <tr>
+            `
+        ));
 
-        document.getElementById("countryTableContent").innerHTML = list;
+        document.getElementById("countryTable").innerHTML = tableContent;
     }
 }
 
-export default ApiCovid;
+export default CovidTablePopulator;
