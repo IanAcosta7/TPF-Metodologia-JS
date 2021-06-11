@@ -1,3 +1,6 @@
 import ApiCovid from "./ApiCovid.js";
+import CovidTablePopulator from "./CovidTablePopulator.js";
 
-ApiCovid.getCountries();
+CovidTablePopulator.countries = await ApiCovid.getCountries();
+CovidTablePopulator.setTableCountry();
+CovidTablePopulator.sortColumn();
