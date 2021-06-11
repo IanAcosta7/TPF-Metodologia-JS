@@ -1,6 +1,7 @@
 class CovidTablePopulator{
 
     static countries;
+    static originalCountries;
     static sortBy = "country";
     static sortAsc = false;
 
@@ -47,12 +48,16 @@ class CovidTablePopulator{
         ));
 
         const columns = document.getElementById("country-columns").children
-
+        
         for (let i = 0; i < columns.length; i++) {
             columns.item(i).addEventListener('click', function(e) {
                 CovidTablePopulator.sortColumn(e.target.id);
             });
         }
+
+        document.getElementById("search").addEventListener("change", function(e) {
+            CovidTablePopulator.search(e.target.value);
+        });
     }
 
     static sortColumn(column = CovidTablePopulator.sortBy) {
@@ -90,6 +95,20 @@ class CovidTablePopulator{
         else
             return 0;
     };
+
+    static search(text) {
+
+        if (text != "")
+            CovidTablePopulator.countries = CovidTablePopulator.originalCountries.filter(country => Object.values(country).some(property => property == text));
+        else
+            CovidTablePopulator.countries = CovidTablePopulator.originalCountries;
+
+        CovidTablePopulator.setTableCountry(CovidTablePopulator.countries);
+        CovidTablePopulator.sortAsc = column == CovidTablePopulator.sortBy && !CovidTablePopulator.sortAsc;
+
+        let element = document.getElementById(column + '-span');
+        element.innerText = this.sortAsc ? "expand_less" : "expand_more";
+    }
 }
 
 export default CovidTablePopulator;
