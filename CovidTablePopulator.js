@@ -8,20 +8,67 @@ class CovidTablePopulator{
     static setTableCountry(){
 
         document.getElementById("country-table").innerHTML = `
-            <tr id="country-columns">
-                <th id="country">country <span id="country-span" class="material-icons">expand_more</span> </th>
-                <th id="abbreviation">abbreviation <span id="abbreviation-span" class="material-icons">expand_more</span></th>
-                <th id="capital_city">capital_city <span id="capital_city-span" class="material-icons">expand_more</span> </th>
-                <th id="confirmed">confirmed <span id="confirmed-span" class="material-icons">expand_more</span> </th>
-                <th id="continent">continent <span id="continent-span" class="material-icons">expand_more</span> </th>
-                <th id="deaths">deaths <span id="deaths-span" class="material-icons">expand_more</span> </th>
-                <th id="elevation_in_meters">elevation_in_meters <span id="elevation_in_meters-span" class="material-icons">expand_more</span> </th>
-                <th id="life_expectancy">life_expectancy <span id="life_expectancy-span" class="material-icons">expand_more</span> </th>
-                <th id="location">location <span id="location-span" class="material-icons">expand_more</span> </th>
-                <th id="long">long <span id="long-span" class="material-icons">expand_more</span> </th>
-                <th id="population">population <span id="population-span" class="material-icons">expand_more</span> </th>
-                <th id="recovered">recovered <span id="recovered-span" class="material-icons">expand_more</span> </th>
-                <th id="sq_km_area">sq_km_area <span id="sq_km_area-span" class="material-icons">expand_more</span> </th>
+            <tr id="country-columns" class="table-hd">
+                <th>
+                    <div id="country" class="head-cell-content">
+                        País <span id="country-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="abbreviation" class="head-cell-content">
+                        Abreviación <span id="abbreviation-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="capital_city" class="head-cell-content">
+                        Capital <span id="capital_city-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="confirmed" class="head-cell-content">
+                        Confirmados <span id="confirmed-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="continent" class="head-cell-content">
+                        Continente <span id="continent-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="deaths" class="head-cell-content">
+                        Muertes <span id="deaths-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="elevation_in_meters" class="head-cell-content">
+                        Elevación (m) <span id="elevation_in_meters-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="life_expectancy" class="head-cell-content">
+                        Esperanza de vida <span id="life_expectancy-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="location" class="head-cell-content">
+                        Ubicación <span id="location-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="population" class="head-cell-content">
+                        Población <span id="population-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="recovered" class="head-cell-content">
+                        Recuperados <span id="recovered-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
+                <th>
+                    <div id="sq_km_area" class="head-cell-content">
+                        Área (km<sup>2</sup>) <span id="sq_km_area-span" class="material-icons sorting-arrow">expand_more</span>
+                    </div>
+                </th>
             </tr>
         `;
 
@@ -39,25 +86,14 @@ class CovidTablePopulator{
                 <td>${country.elevation_in_meters ? country.elevation_in_meters : ''}</td>
                 <td>${country.life_expectancy ? country.life_expectancy : ''}</td>
                 <td>${country.location ? country.location : ''}</td>
-                <td>${country.long ? country.long : ''}</td>
                 <td>${country.population ? country.population : ''}</td>
                 <td>${country.recovered ? country.recovered : ''}</td>
                 <td>${country.sq_km_area ? country.sq_km_area : ''}</td>
             <tr>
             `
-        ));
+        )).join(' ');
 
-        const columns = document.getElementById("country-columns").children
-        
-        for (let i = 0; i < columns.length; i++) {
-            columns.item(i).addEventListener('click', function(e) {
-                CovidTablePopulator.sortColumn(e.target.id);
-            });
-        }
-
-        document.getElementById("search").addEventListener("change", function(e) {
-            CovidTablePopulator.search(e.target.value);
-        });
+        CovidTablePopulator.addColumnsEventListeners();
     }
 
     static sortColumn(column = CovidTablePopulator.sortBy) {
@@ -108,6 +144,20 @@ class CovidTablePopulator{
 
         let element = document.getElementById(column + '-span');
         element.innerText = this.sortAsc ? "expand_less" : "expand_more";
+    }
+
+    static addColumnsEventListeners() {
+        const columns = document.getElementById("country-columns").children
+        
+        for (let i = 0; i < columns.length; i++) {
+            columns.item(i).addEventListener('click', function(e) {
+                CovidTablePopulator.sortColumn(e.target.id);
+            });
+        }
+
+        document.getElementById("search-country").addEventListener("change", function(e) {
+            CovidTablePopulator.search(e.target.value);
+        });
     }
 }
 

@@ -11,15 +11,22 @@
 </head>
 <body>
     <div id="chartdiv"></div>
-    <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search" >
-    <table id="country-table" class="table">
-    </table>
+
+    <div class="search-country">
+        <input id="search-country" type="text" class="form-control" placeholder="Search" aria-label="Search">
+    </div>
+    
+    <div class="table-responsive">
+        <table id="country-table" class="table table-striped align-middle table-bordered table-hover">
+        </table>
+    </div>
 </body>
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/geodata/continentsLow.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/geodata/worldLow.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
 <script src="index.js" type= "module"></script>
 <script src="map.js"></script>
 </html>
