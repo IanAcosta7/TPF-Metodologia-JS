@@ -56,6 +56,7 @@ am4core.ready(function() {
     homeButton.events.on("hit", function(){
       chart.goHome();
     });
+
     
     homeButton.icon = new am4core.Sprite();
     homeButton.padding(7, 5, 7, 5);
@@ -125,7 +126,11 @@ am4core.ready(function() {
         event.target.dummyData.isHover = false;
       }
     })
-    
+    //MODIFICAR FUNCIONALIDAD. EVENT ME TRAE ALGO QUE SIRVA?
+    template.events.on("hit", function (event) {
+      console.log("ACA TENGO QUE HACER ALGO");
+    })
+
     var hs = polygonSeries.mapPolygons.template.states.create("hover");
     hs.properties.fillOpacity = 1;
     hs.properties.fill = am4core.color("#deb7ad");
