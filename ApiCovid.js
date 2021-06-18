@@ -7,7 +7,7 @@ class ApiCovid {
 
     static filterBadData(data) {
         return data.filter(value => {
-            return !Object.values(value).some(attribute => attribute == null || attribute == undefined);
+            return (!Object.values(value).some(attribute => attribute == null || attribute == undefined)) && value.country != undefined && value.confirmed != undefined;
         });
     }
 }
