@@ -4,6 +4,7 @@ class CovidTablePopulator{
     static originalCountries;
     static sortBy = "country";
     static sortAsc = false;
+    static covidChart;
 
     static setTableCountry(){
 
@@ -110,6 +111,8 @@ class CovidTablePopulator{
 
         CovidTablePopulator.setTableCountry(CovidTablePopulator.countries);
 
+        CovidTablePopulator.covidChart.updateChart(CovidTablePopulator.countries);
+
         let element = document.getElementById(column + '-span');
         element.innerText = this.sortAsc ? "expand_less" : "expand_more";
     };
@@ -140,10 +143,7 @@ class CovidTablePopulator{
             CovidTablePopulator.countries = CovidTablePopulator.originalCountries;
 
         CovidTablePopulator.setTableCountry(CovidTablePopulator.countries);
-        CovidTablePopulator.sortAsc = column == CovidTablePopulator.sortBy && !CovidTablePopulator.sortAsc;
-
-        let element = document.getElementById(column + '-span');
-        element.innerText = this.sortAsc ? "expand_less" : "expand_more";
+        CovidTablePopulator.covidChart.updateChart(CovidTablePopulator.countries);
     }
 
     static addColumnsEventListeners() {
