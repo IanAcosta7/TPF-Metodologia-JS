@@ -5,6 +5,40 @@ class CovidChart {
     constructor(element) {
         this.element = element;
     }
+    
+    draw(countries) {
+        countries = countries.slice(0, 10)
+
+        this.chart = new Chart(this.element, {
+            type: 'bar',
+            data: {
+                labels: countries.map(country => country.country),
+                datasets: [{
+                label: 'Casos confirmados',
+                    data: countries.map(country => country.confirmed),
+                    backgroundColor: 'rgba(251,235,219,1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        max: Math.max.apply(null, countries.map(country => country.confirmed)),
+                        beginAtZero: true
+                    }
+                },
+                layout: {
+                    padding: 20
+                },
+                aspectRatio: 1
+            }
+        });
+
+        const size = document.getElementById("chartdiv").offsetHeight + "px";
+
+        this.chart.canvas.parentNode.style.height = size;
+        this.chart.canvas.parentNode.style.width = size;
+    }
 
     updateChart(countries) {
         countries = countries.slice(0, 10);
